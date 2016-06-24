@@ -12,18 +12,18 @@ from .database import session, Player_Statistics
 @app.route("/nbastats/players", methods=["GET"])
 @decorators.accept("application/json")
 def players_get():
-    players = session.query(database.Player_Statistics.name).all()
+    players = session.query(database.Player_Statistics.id).all()
     
     data = json.dumps([player.as_dictionary for player in players])
     return Response(data, 200, mimetype="application/json")
 
 @app.route("/nbastats/player", methods=["GET"])
 @decorators.accept("application/json")
-def player_get(name):
-    player = session.query(database.Player_Statistics).get(name)
+def player_get(id):
+    player = session.query(database.Player_Statistics).get(id)
     
     if not player:
-        message = "Could not find player name: {}".format(name)
+        message = "Could not find player name: {}".format(id)
         data = json.dumps({"message": message})
         return Response(data, 404, mimetype="application/json")
 

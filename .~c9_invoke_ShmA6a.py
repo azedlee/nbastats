@@ -1,4 +1,4 @@
-import numpy as np
+from numpy import genfromtxt
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 import os
@@ -14,7 +14,7 @@ def run():
 
 @manager.command
 def Load_Data(file_name):
-    data = np.genfromtxt(file_name, delimiter=",", skip_header=1, usecols=np.arange(0,22))
+    data = genfromtxt(file_name, delimiter=",", skip_header=1, usecols=np.arange(0,1434))
     
     try:
         for i in data.tolist():
