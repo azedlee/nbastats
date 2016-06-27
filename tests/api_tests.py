@@ -16,11 +16,10 @@ class TestAPI(unittest.TestCase):
     def setUp(self):
         """ Test setup """
         self.client = app.test_client()
-
         Base.metadata.create_all(engine)
     
-    def get_empty_player(self):
-        response = self.client.get("/api/player",
+    def test_get_empty_player(self):
+        response = self.client.get("/nbastats/players",
                                     headers=[("Accept", "application/json")])
         
         self.assertEqual(response.status_code, 200)
@@ -29,29 +28,26 @@ class TestAPI(unittest.TestCase):
         data = json.loads(response.data.decode('UTF-8'))
         self.assertEqual(data, [])
     
-    def get_player(self):
+    def test_get_player(self):
         playerA = Player_Statistics(name="Player A",
-                                            game_played = 82,
-                                            pts_per_game = 20.0)
-        playerB = Player_Statistics(name="Player B",
                                             game_played = 75,
                                             pts_per_game = 18.7)
         
-        session.add_all([playerA, playerB])
+        session.add(playerA)
         session.commit()
         
-        response = self.client.get("/api/players/{}".format(playerB.id),
+        response = self.client.get("/nbastats/players/{}".format(playerA.id),
                                     headers=[("Accept", "application/json")])
         
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.mimetype, "application/json")
         
-        data = json.loads(response.data.decode("UTF-8"))
-        self.assertEqual(playerB["name"], "Player B")
-        self.assertEqual(playerB["game_played"], 75)
-        self.assertEqual(playerB["pts_per_game"], 18.7)
+        playerA = json.loads(response.data.decode("UTF-8"))
+        self.assertEqual(playerA["name"], "Player A")
+        self.assertEqual(playerA["game_played"], 75)
+        self.assertEqual(playerA["pts_per_game"], 18.7)
     
-    def get_players(self):
+    def test_get_players(self):
         playerA = Player_Statistics(name="Player A",
                                             game_played = 82,
                                             pts_per_game = 20.0)
@@ -62,21 +58,20 @@ class TestAPI(unittest.TestCase):
         session.add_all([playerA, playerB])
         session.commit()
         
-        response = self.client.get("/api/players",
+        response = self.client.get("/nbastats/players",
                                     headers=[("Accept", "application/json")])
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.mimetype, "application/json")
 
         data = json.loads(response.data.decode("UTF-8"))
         self.assertEqual(len(data), 2)
 
-        postA = data[0]
+        playerA = data[0]
         self.assertEqual(playerA["name"], "Player A")
         self.assertEqual(playerA["game_played"], 82)
         self.assertEqual(playerA["pts_per_game"], 20.0)
 
-        postB = data[1]
+        playerB = data[1]
         self.assertEqual(playerB["name"], "Player B")
         self.assertEqual(playerB["game_played"], 75)
         self.assertEqual(playerB["pts_per_game"], 18.7)

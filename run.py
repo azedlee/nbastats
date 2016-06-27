@@ -46,8 +46,14 @@ def Load_Data(file_name):
         session.commit()
     except:
         session.rollback()
-    finally:
-        session.close()
+
+import csv
+@manager.command
+def Data_Load(file_name):
+    with open(file_name, newline='') as csvfile:
+        docreader = csv.reader(csvfile, delimiter=',')
+        for row in docreader:
+            print(', '.join(row))
 
 if __name__ == '__main__':
     manager.run()
