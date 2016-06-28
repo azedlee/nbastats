@@ -25,4 +25,4 @@ def Load(file_name):
     df.to_sql('playerstats', engine, if_exists='replace')
 
 if __name__ == '__main__':
-    manager.run()
+    run()

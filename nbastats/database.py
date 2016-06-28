@@ -37,6 +37,7 @@ class Player_Statistics(Base):
     
     def as_dictionary(self):
         return {
+            "id" : self.id,
             "name" : self.name,
             "team" : self.team,
             "position" : self.position,

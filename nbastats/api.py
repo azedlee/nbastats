@@ -77,7 +77,7 @@ def players_get():
     if plus_minus_rating_like:
         players = players.filter(Player_Statistics.plus_minus_rating.contains(plus_minus_rating_like))
     
-    data = json.dumps([player.as_dictionary for player in players])
+    data = json.dumps([player.as_dictionary() for player in players])
     return Response(data, 200, mimetype="application/json")
 
 @app.route("/nbastats/players/<int:id>", methods=['GET'])
@@ -101,7 +101,7 @@ def player_top_pts_get():
     position_like = request.args.get("position_like")
     pts_per_game_like = request.args.get("pts_per_game_like")
     
-    players = session.query(Player_Statistics).order_by(Player_Statistics.pts_per_game).limit(5)
+    players = session.query(Player_Statistics).order_by(Player_Statistics.pts_per_game.desc()).limit(5)
     
     if name_like:
         players = players.filter(Player_Statistics.name.contains(name_like))
@@ -112,7 +112,7 @@ def player_top_pts_get():
     if pts_per_game_like:
         players = players.filter(Player_Statistics.pts_per_game.contains(pts_per_game_like))
     
-    data = json.dumps([player.as_pts_dictionary for player in players])
+    data = json.dumps([player.as_pts_dictionary() for player in players])
     return Response(data, 200, mimetype="application/json")
     
 @app.route("/nbastats/players/rebounds", methods=['GET'])
@@ -123,7 +123,7 @@ def player_top_reb_get():
     position_like = request.args.get("position_like")
     reb_per_game_like = request.args.get("reb_per_game_like")
     
-    players = session.query(Player_Statistics).order_by(Player_Statistics.reb_per_game).limit(5)
+    players = session.query(Player_Statistics).order_by(Player_Statistics.reb_per_game.desc()).limit(5)
     
     if name_like:
         players = players.filter(Player_Statistics.name.contains(name_like))
@@ -134,7 +134,7 @@ def player_top_reb_get():
     if reb_per_game_like:
         players = players.filter(Player_Statistics.reb_per_game.contains(reb_per_game_like))
     
-    data = json.dumps([player.as_reb_dictionary for player in players])
+    data = json.dumps([player.as_reb_dictionary() for player in players])
     return Response(data, 200, mimetype="application/json")
 
 @app.route("/nbastats/players/assists", methods=['GET'])
@@ -145,7 +145,7 @@ def player_top_ast_get():
     position_like = request.args.get("position_like")
     ast_per_game_like = request.args.get("ast_per_game_like")
     
-    players = session.query(Player_Statistics).order_by(Player_Statistics.ast_per_game).limit(5)
+    players = session.query(Player_Statistics).order_by(Player_Statistics.ast_per_game.desc()).limit(5)
     
     if name_like:
         players = players.filter(Player_Statistics.name.contains(name_like))
@@ -167,7 +167,7 @@ def player_top_plus_minus_get():
     position_like = request.args.get("position_like")
     plus_minus_rating_like = request.args.get("plus_minus_rating_like")
     
-    players = session.query(Player_Statistics).order_by(Player_Statistics.plus_minus_rating).limit(5)
+    players = session.query(Player_Statistics).order_by(Player_Statistics.plus_minus_rating()).limit(5)
     
     if name_like:
         players = players.filter(Player_Statistics.name.contains(name_like))
@@ -178,5 +178,5 @@ def player_top_plus_minus_get():
     if plus_minus_rating_like:
         players = players.filter(Player_Statistics.plus_minus_rating.contains(plus_minus_rating_like))
     
-    data = json.dumps([player.as_plus_minus_dictionary for player in players])
+    data = json.dumps([player.as_plus_minus_dictionary() for player in players])
     return Response(data, 200, mimetype="application/json")
