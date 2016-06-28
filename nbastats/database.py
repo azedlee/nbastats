@@ -1,4 +1,3 @@
-from numpy import genfromtxt
 from sqlalchemy import create_engine, Column, Integer, String, Float
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -38,7 +37,6 @@ class Player_Statistics(Base):
     
     def as_dictionary(self):
         return {
-            "id": self.id,
             "name" : self.name,
             "team" : self.team,
             "position" : self.position,
@@ -61,5 +59,40 @@ class Player_Statistics(Base):
             "tot_tech" : self.tot_tech,
             "plus_minus_rating" : self.plus_minus_rating
         }
-
+    
+    def as_pts_dictionary(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "team": self.team,
+            "position": self.position,
+            "pts_per_game": self.pts_per_game
+        }
+        
+    def as_reb_dictionary(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "team": self.team,
+            "position": self.position,
+            "reb_per_game": self.reb_per_game
+        }
+    
+    def as_ast_dictionary(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "team": self.team,
+            "position": self.position,
+            "ast_per_game": self.ast_per_game
+        }
+    def as_plus_minus_dictionary(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "team": self.team,
+            "position": self.position,
+            "plus_minus_rating": self.plus_minus_rating
+        }
+            
 Base.metadata.create_all(engine)

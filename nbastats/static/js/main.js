@@ -21,8 +21,9 @@
 //     target.val(value.val());
 // }
 
-$.ajax({
+jQuery.ajax({
     url: "/nbastats/players",
 }).done(function( data ) {
     console.log(data);
 });
+
