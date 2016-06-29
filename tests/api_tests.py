@@ -80,23 +80,23 @@ class TestAPI(unittest.TestCase):
         playerA = Player_Statistics(name="Player 1",
                                     team="CLE",
                                     position="C",
-                                    pts_per_game=20.0)
+                                    pts_per_game=15.0)
         playerB = Player_Statistics(name="Player 2",
                                     team="CLE",
                                     position="PF",
-                                    pts_per_game=15.0)
+                                    pts_per_game=5.0)
         playerC = Player_Statistics(name="Player 3",
                                     team="CLE",
                                     position="SF",
-                                    pts_per_game=10.0)
+                                    pts_per_game=20.0)
         playerD = Player_Statistics(name="Player 4",
                                     team="CLE",
                                     position="SG",
-                                    pts_per_game=5.0)
+                                    pts_per_game=2.5)
         playerE = Player_Statistics(name="Player 5",
                                     team="CLE",
                                     position="PG",
-                                    pts_per_game=2.5)
+                                    pts_per_game=10.0)
         
         session.add_all([playerA, playerB, playerC, playerD, playerE])
         session.commit()
@@ -108,36 +108,37 @@ class TestAPI(unittest.TestCase):
 
         data = json.loads(response.data.decode("UTF-8"))
         self.assertEqual(len(data), 5)
-        
-        playerA = data[0]
-        self.assertEqual(playerA['name'], "Player 1")
-        self.assertEqual(playerA['team'], 'CLE')
-        self.assertEqual(playerA['position'], 'C')
-        self.assertEqual(playerA['pts_per_game'], 20.0)
-        
-        playerB = data[1]
-        self.assertEqual(playerB['name'], 'Player 2')
-        self.assertEqual(playerB['team'], 'CLE')
-        self.assertEqual(playerB['position'], 'PF')
-        self.assertEqual(playerB['pts_per_game'], 15.0)
-        
-        playerC = data[2]
+
+        playerC = data[0]
         self.assertEqual(playerC['name'], 'Player 3')
         self.assertEqual(playerC['team'], 'CLE')
         self.assertEqual(playerC['position'], 'SF')
-        self.assertEqual(playerC['pts_per_game'], 10.0)
-        
-        playerD = data[3]
-        self.assertEqual(playerD['name'], 'Player 4')
-        self.assertEqual(playerD['team'], 'CLE')
-        self.assertEqual(playerD['position'], 'SG')
-        self.assertEqual(playerD['pts_per_game'], 5.0)
-        
-        playerE = data[4]
+        self.assertEqual(playerC['pts_per_game'], 20.0)
+
+        playerA = data[1]
+        self.assertEqual(playerA['name'], "Player 1")
+        self.assertEqual(playerA['team'], 'CLE')
+        self.assertEqual(playerA['position'], 'C')
+        self.assertEqual(playerA['pts_per_game'], 15.0)
+
+        playerE = data[2]
         self.assertEqual(playerE['name'], 'Player 5')
         self.assertEqual(playerE['team'], 'CLE')
         self.assertEqual(playerE['position'], 'PG')
-        self.assertEqual(playerE['pts_per_game'], 2.5)
+        self.assertEqual(playerE['pts_per_game'], 10.0)
+        
+        playerB = data[3]
+        self.assertEqual(playerB['name'], 'Player 2')
+        self.assertEqual(playerB['team'], 'CLE')
+        self.assertEqual(playerB['position'], 'PF')
+        self.assertEqual(playerB['pts_per_game'], 5.0)
+        
+        playerD = data[4]
+        self.assertEqual(playerD['name'], 'Player 4')
+        self.assertEqual(playerD['team'], 'CLE')
+        self.assertEqual(playerD['position'], 'SG')
+        self.assertEqual(playerD['pts_per_game'], 2.5)
+
         
     def tearDown(self):
         """ Test teardown """

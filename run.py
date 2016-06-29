@@ -3,11 +3,14 @@ import pandas as pd
 import sqlalchemy as sa
 import os
 import sys
+import csvkit
 
 from flask_script import Manager
 
+from sqlalchemy import create_engine
+
 from nbastats import app
-from nbastats.database import Player_Statistics, engine
+from nbastats.database import Player_Statistics
 
 manager = Manager(app)
 
@@ -18,11 +21,10 @@ def run():
 
 @manager.command
 def Load(file_name):
-
-    engine = sa.create_engine("postgresql://ubuntu:thinkful@localhost:5432/nbastats")
     
-    df = pd.read_csv(file_name, skiprows=1, header=None)
-    df.to_sql('playerstats', engine, if_exists='replace')
+    engine = create_engine(app.config["DATABASE_URI"])
+    df = pd.read_csv(file_name, index_col=False, skiprows=1, header=None)
+    df.to_sql('playerstats', engine, if_exists='append')
 
 if __name__ == '__main__':
-    run()
+    manager.run()
