@@ -35,6 +35,14 @@ class Player_Statistics(Base):
     tot_tech = Column(Integer)
     plus_minus_rating = Column(Integer)
     
+    __tablename__ = 'playerstats_test'
+    
+    id = Column(Integer, primary_key=True, nullable=False)
+    name = Column(String(1024))
+    team = Column(String(1024))
+    position = Column(String(128))
+    game_played = Column(Integer)
+    
     def as_dictionary(self):
         return {
             "id" : self.id,
