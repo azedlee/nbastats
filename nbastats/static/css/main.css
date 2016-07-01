@@ -1,0 +1,15 @@
+.selection-wrapper select{
+    width: 50%;
+    display: inline-block;
+    margin: 5px 0 5px 10px;
+}
+
+.table-container {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+table tr th,
+table tr td {
+    text-align: center;
+}

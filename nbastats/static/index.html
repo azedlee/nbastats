@@ -1,38 +1,251 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <title>NBASTATS</title>
     <meta charset="UTF-8">
-    <title>hfdhdfh</title>
     <link rel="stylesheet" href="" type="text/css" />
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    
+    <!-- Fonts -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    
+    <!-- CSS -->
+    <!-- NBA Stats -->
+    <link rel="stylesheet" href="static/css/main.css">
+
 </head>
 <body>
     
     <div class="header-wrapper">
-        <h1>NBA PLAYER COMPARISON</h1>
+        <h1>NBA Player Stats Comparison 2015-2016 Season</h1>
     </div>
 
     
     <div class="selection-wrapper">
-        <label for="">P1</label>
-        <select id="player-1">
+        <label for="">Player 1</label>
+        <select id="player-one" class="form-control">
             <option>Select your player</option>
         </select>
         <br/>
-        <label for="">P2</label>
-        <select id="player-2">
+        <label for="">Player 2</label>
+        <select id="player-two" class="form-control">
             <option>Select your player</option>
         </select>
     </div>
     
     <div class="selected-wrapper">
-        <h2>P1</h2>
-        <h3 id="player-1-stat"></h3>
-        <h2>P2</h2>
-        <h3 id="player-2-stat"></h3>
+        <h2>Player 1</h2>
+        <h3 id="player-one-stat"></h3>
+        <table border=1 class="table">
+            <tr>
+                <td>Name</td>
+                <td>Team</td>
+                <td>Pos</td>
+                <td>Games</td>
+                <td>MinpG</td>
+                <td>FG%</td>
+                <td>FT%</td>
+                <td>3ptM</td>
+                <td>3pt%</td>
+                <td>3ptpG</td>
+                <td>PpG</td>
+                <td>ORpG</td>
+                <td>DRpG</td>
+                <td>RpG</td>
+                <td>ApG</td>
+                <td>SpG</td>
+                <td>BpG</td>
+                <td>TOpG</td>
+                <td>PFpG</td>
+                <td>Tech</td>
+                <td>+/-</td>
+            </tr>
+            <tr>
+                <td id="one-name">-</td>
+                <td id="one-team">-</td>
+                <td id="one-pos">-</td>
+                <td id="one-gp">-</td>
+                <td id="one-min">-</td>
+                <td id="one-fg">-</td>
+                <td id="one-ft">-</td>
+                <td id="one-threem">-</td>
+                <td id="one-threeper">-</td>
+                <td id="one-threepg">-</td>
+                <td id="one-pts">-</td>
+                <td id="one-oreb">-</td>
+                <td id="one-dreb">-</td>
+                <td id="one-reb">-</td>
+                <td id="one-ast">-</td>
+                <td id="one-stl">-</td>
+                <td id="one-blk">-</td>
+                <td id="one-to">-</td>
+                <td id="one-pf">-</td>
+                <td id="one-tech">-</td>
+                <td id="one-pmr">-</td>
+            </tr>
+        </table>
+        <h2>Player 2</h2>
+        <h3 id="player-two-stat"></h3>
+        <table border=1 class="table">
+            <tr>
+                <td>Name</td>
+                <td>Team</td>
+                <td>Pos</td>
+                <td>Games</td>
+                <td>MinpG</td>
+                <td>FG%</td>
+                <td>FT%</td>
+                <td>3ptM</td>
+                <td>3pt%</td>
+                <td>3ptpG</td>
+                <td>PpG</td>
+                <td>ORpG</td>
+                <td>DRpG</td>
+                <td>RpG</td>
+                <td>ApG</td>
+                <td>SpG</td>
+                <td>BpG</td>
+                <td>TOpG</td>
+                <td>PFpG</td>
+                <td>Tech</td>
+                <td>+/-</td>
+            </tr>
+            <tr>
+                <td id="two-name">-</td>
+                <td id="two-team">-</td>
+                <td id="two-pos">-</td>
+                <td id="two-gp">-</td>
+                <td id="two-min">-</td>
+                <td id="two-fg">-</td>
+                <td id="two-ft">-</td>
+                <td id="two-threem">-</td>
+                <td id="two-threeper">-</td>
+                <td id="two-threepg">-</td>
+                <td id="two-pts">-</td>
+                <td id="two-oreb">-</td>
+                <td id="two-dreb">-</td>
+                <td id="two-reb">-</td>
+                <td id="two-ast">-</td>
+                <td id="two-stl">-</td>
+                <td id="two-blk">-</td>
+                <td id="two-to">-</td>
+                <td id="two-pf">-</td>
+                <td id="two-tech">-</td>
+                <td id="two-pmr">-</td>
+            </tr>
+        </table>
     </div>
     
-    <script   src="https://code.jquery.com/jquery-3.0.0.min.js"   integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
-    <script src="static/js/main.js"></script>
+    <div class=topfive-wrapper>
+        <div class="table-container">
+            <h4>Top 5 PpG</h4>
+            <table border=1 class="table">
+                <tr>
+                    <td id="ppg-name-one"></td>
+                    <td id="ppg-num-one"></td>
+                </tr>
+                <tr>
+                    <td id="ppg-name-two"></td>
+                    <td id="ppg-num-two"></td>
+                </tr>
+                <tr>
+                    <td id="ppg-name-three"></td>
+                    <td id="ppg-num-three"></td>
+                </tr>
+                <tr>
+                    <td id="ppg-name-four"></td>
+                    <td id="ppg-num-four"></td>
+                </tr>
+                <tr>
+                    <td id="ppg-name-five"></td>
+                    <td id="ppg-num-five"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="table-container">
+            <h4>Top 5 RpG</h4>
+            <table border=1 class="table">
+                <tr>
+                    <td id="rpg-name-one"></td>
+                    <td id="rpg-num-one"></td>
+                </tr>
+                <tr>
+                    <td id="rpg-name-two"></td>
+                    <td id="rpg-num-two"></td>
+                </tr>
+                <tr>
+                    <td id="rpg-name-three"></td>
+                    <td id="rpg-num-three"></td>
+                </tr>
+                <tr>
+                    <td id="rpg-name-four"></td>
+                    <td id="rpg-num-four"></td>
+                </tr>
+                <tr>
+                    <td id="rpg-name-five"></td>
+                    <td id="rpg-num-five"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="table-container">
+            <h4>Top 5 ApG</h4>
+            <table border=1 class="table">
+                <tr>
+                    <td id="apg-name-one"></td>
+                    <td id="apg-num-one"></td>
+                </tr>
+                <tr>
+                    <td id="apg-name-two"></td>
+                    <td id="apg-num-two"></td>
+                </tr>
+                <tr>
+                    <td id="apg-name-three"></td>
+                    <td id="apg-num-three"></td>
+                </tr>
+                <tr>
+                    <td id="apg-name-four"></td>
+                    <td id="apg-num-four"></td>
+                </tr>
+                <tr>
+                    <td id="apg-name-five"></td>
+                    <td id="apg-num-five"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="table-container">
+            <h4>Top 5 +/- Rating</h4>
+            <table border=1 class="table">
+                <tr>
+                    <td id="pmr-name-one"></td>
+                    <td id="pmr-num-one"></td>
+                </tr>
+                <tr>
+                    <td id="pmr-name-two"></td>
+                    <td id="pmr-num-two"></td>
+                </tr>
+                <tr>
+                    <td id="pmr-name-three"></td>
+                    <td id="pmr-num-three"></td>
+                </tr>
+                <tr>
+                    <td id="pmr-name-four"></td>
+                    <td id="pmr-num-four"></td>
+                </tr>
+                <tr>
+                    <td id="pmr-name-five"></td>
+                    <td id="pmr-num-five"></td>
+                </tr>
+            </table>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
     
+    <!-- JS -->
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"   integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
+    <!-- NBA Stats -->
+    <script src="static/js/main.js"></script>
 </body>
 </html>

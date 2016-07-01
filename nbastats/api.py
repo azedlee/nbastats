@@ -156,7 +156,7 @@ def player_top_ast_get():
     if ast_per_game_like:
         players = players.filter(Player_Statistics.ast_per_game.contains(ast_per_game_like))
     
-    data = json.dumps([player.as_ast_dictionary for player in players])
+    data = json.dumps([player.as_ast_dictionary() for player in players])
     return Response(data, 200, mimetype="application/json")
 
 @app.route("/nbastats/players/plus_minus_rating", methods=['GET'])
@@ -167,7 +167,7 @@ def player_top_plus_minus_get():
     position_like = request.args.get("position_like")
     plus_minus_rating_like = request.args.get("plus_minus_rating_like")
     
-    players = session.query(Player_Statistics).order_by(Player_Statistics.plus_minus_rating()).limit(5)
+    players = session.query(Player_Statistics).order_by(Player_Statistics.plus_minus_rating.desc()).limit(5)
     
     if name_like:
         players = players.filter(Player_Statistics.name.contains(name_like))

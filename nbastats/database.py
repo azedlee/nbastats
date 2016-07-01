@@ -9,6 +9,16 @@ Base = declarative_base()
 Session = sessionmaker(bind=engine)
 session = Session()
 
+class Player_Statistics_Test(Base):
+    
+    __tablename__ = 'playerstats_test'
+    
+    id = Column(Integer, primary_key=True, nullable=False)
+    name = Column(String(1024))
+    team = Column(String(1024))
+    position = Column(String(128))
+    game_played = Column(Integer)
+
 class Player_Statistics(Base):
     __tablename__ = 'playerstats'
     
@@ -34,14 +44,6 @@ class Player_Statistics(Base):
     fouls_per_game = Column(Float)
     tot_tech = Column(Integer)
     plus_minus_rating = Column(Integer)
-    
-    __tablename__ = 'playerstats_test'
-    
-    id = Column(Integer, primary_key=True, nullable=False)
-    name = Column(String(1024))
-    team = Column(String(1024))
-    position = Column(String(128))
-    game_played = Column(Integer)
     
     def as_dictionary(self):
         return {
@@ -95,6 +97,7 @@ class Player_Statistics(Base):
             "position": self.position,
             "ast_per_game": self.ast_per_game
         }
+        
     def as_plus_minus_dictionary(self):
         return {
             "id": self.id,

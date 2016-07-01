@@ -7,7 +7,5 @@ itsdangerous
 jsonschema
 nose
 psycopg2
-numpy
 flask-script
 flask-migrate
-pandas
