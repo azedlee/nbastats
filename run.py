@@ -20,7 +20,9 @@ import csv
 import psycopg2
 @manager.command
 def Data_Load(file_name):
-    conn = psycopg2.connect("host='localhost' port='5432' dbname='nbastats' user='ubuntu' password='thinkful'")
+    conn = psycopg2.connect("host='ec2-23-21-148-9.compute-1.amazonaws.com' port='5432' dbname='d3gntcc7ejvold' user='zmdkdpsjliuemk' password='NLy9RzlvAtKyw5OZ50Xn7neP4P'")
+    # For localhost
+    # conn = psycopg2.connect("host='localhost' port='5432' dbname='nbastats' user='ubuntu' password='thinkful'")
     cur = conn.cursor()
 
     with open(file_name, 'rt', encoding="utf8") as csvfile:
